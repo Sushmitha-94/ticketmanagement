@@ -1,21 +1,39 @@
 package com.sush.ticket.service;
 
+import com.sush.ticket.dao.TicketDAO;
 import com.sush.ticket.model.Ticket;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import javax.transaction.Transactional;
 
-@Component
+@Service
+@Transactional
 public class TicketServiceImpl implements TicketService {
+
+    @Autowired
+    private TicketDAO ticketDAOImpl;
 
     @Override
     public Ticket getTicketDetils(Integer id) {
-        Ticket newTicket=new Ticket();
-        newTicket.setId(id);
-        newTicket.setFrom("Pudukkottai");
-        newTicket.setTo("Chennai");
-        newTicket.setName("Sushmitha");
-        newTicket.setDateOfJourney(new Date());
-        return newTicket;
+        Ticket ticket= ticketDAOImpl.getTicketDetails(id);
+        return ticket;
+    }
+
+    @Override
+    public Ticket saveTicket(Ticket ticket) {
+        ticket = ticketDAOImpl.insertTicket(ticket);
+        return ticket;
+    }
+
+    @Override
+    public Ticket updateTicket(Ticket ticket) {
+        ticket = ticketDAOImpl.updateTicket(ticket);
+        return ticket;
+    }
+
+    @Override
+    public void deleteTicket(Integer id) {
+        ticketDAOImpl.deleteTicket(getTicketDetils(id));
     }
 }

@@ -1,13 +1,27 @@
 package com.sush.ticket.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name="ticket")
 public class Ticket {
 
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String from;
-    private String to;
+
+    @Column(name="SOURCE")
+    private String source;
+
+    @Column(name="DESTINATION")
+    private String destination;
+
+    @Column(name="NAME")
     private String name;
+
+    @Column(name="DATEOFJOURNEY")
     private Date dateOfJourney;
 
     public Integer getId() {
@@ -18,20 +32,20 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getFrom() {
-        return from;
+    public String getSource() {
+        return source;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setSource(String source) {
+        this.source = source;
     }
 
-    public String getTo() {
-        return to;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public String getName() {
